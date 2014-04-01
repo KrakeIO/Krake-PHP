@@ -2,22 +2,20 @@
 
   // Gets records for a specific batch
 
-  // The data can be viewed at https://getdata.io/krakes/199-worldwide-directory-of-public-companies
-  // The API can be uniquely identified using  "1_worldwide_directory_of_public_companieseses"
+  // The data can be viewed at https://getdata.io/krakes/966-www-marionford-com-used-cars
+  // The API can be uniquely identified using  "1_7a72a8898dc7cac18b38d849cbe9a56feses"
   require_once('../krake_client.php');
 
-  $datasource_unique_id = "1_worldwide_directory_of_public_companieseses";
+  $datasource_unique_id = "1_7a72a8898dc7cac18b38d849cbe9a56feses";
   $k_client = new KrakeClient($datasource_unique_id);
   $batches = $k_client->getBatches();
   $batch = $batches[0]->pingedAt;
 
-  // $records_per_page = 10;
-  // $page_num = 0;
-  $records_per_page = -1;
-  $page_num = -1;
-  $batch_records = $k_client->getBatchRecords($batch, $records_per_page, $page_num);
+  $additions = $k_client->getBatchAdditions($batch);
+  
+  echo "Records that were added in the latest batch";
+  print_r($additions);
 
-  print_r($batch_records);
 
   // Sample Response
   // ===============================
@@ -184,4 +182,5 @@
   //         )
 
   // )  
+
 ?>
