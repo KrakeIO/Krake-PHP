@@ -12,7 +12,6 @@
     // If no index_columns were indicated returns and empty array
     // $batch:String
     public function getBatchAdditions($batch) {
-
       if(!$this->usesIndex()) {
         return array();
       }
@@ -67,6 +66,7 @@
     // Gets the priorly existing records in the previous batch that no longer exist in this one
     // $batch:String
     public function getBatchDeletions($batch) {
+
       if(!$this->usesIndex()) {
         return array();
       }
@@ -98,6 +98,7 @@
     public function getPreviousBatch($batch) {
       $batches = $this->getBatches();
       for($x = 0; $x < count($batches); $x++) {
+        $batches[$x]->pingedAt = preg_replace("/\+[0-9]{2}/", '', $batches[$x]->pingedAt); 
         if( $batches[$x]->pingedAt == $batch && isset($batches[$x + 1]) ) {
           return $batches[$x + 1]->pingedAt;
         }
