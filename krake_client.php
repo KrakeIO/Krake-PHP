@@ -26,8 +26,7 @@
 
       $query_string = json_encode($query_obj);
       $data_feed_location = $this->getDataFeedPath($query_string);
-      $raw_response = $this->getData($data_feed_location);
-      return json_decode($raw_response);
+      return $this->getJsonData($data_feed_location);
     }
 
 
@@ -57,8 +56,7 @@
 
       $query_string = json_encode($query_obj);
       $data_feed_location = $this->getDataFeedPath($query_string);
-      $raw_response = $this->getData($data_feed_location);
-      return json_decode($raw_response);
+      return $this->getJsonData($data_feed_location);
     }
 
 
@@ -86,8 +84,7 @@
 
       $query_string = json_encode($query_obj);
       $data_feed_location = $this->getDataFeedPath($query_string);
-      $raw_response = $this->getData($data_feed_location);
-      return json_decode($raw_response);
+      return $this->getJsonData($data_feed_location);
 
     }
 
@@ -142,8 +139,7 @@
 
       $query_string = json_encode($query_obj);
       $data_feed_location = $this->getDataFeedPath($query_string);
-      $raw_response = $this->getData($data_feed_location);
-      return json_decode($raw_response);
+      return $this->getJsonData($data_feed_location);
     }    
 
 
@@ -166,8 +162,7 @@
       );
       $query_string = json_encode($query_obj);
       $data_feed_location = $this->getDataFeedPath($query_string);
-      $raw_response = $this->getData($data_feed_location);
-      return json_decode($raw_response);
+      return $this->getJsonData($data_feed_location);
     }
 
 
@@ -182,10 +177,13 @@
     // Gets the columns that will be returned with each record
     public function getColumns() {
       $data_feed_location = KrakeClient::DATA_EXPORT_SERVER . $this->handle . '/schema';
-      $raw_response = $this->getData($data_feed_location);
-      return json_decode($raw_response);      
+      return $this->getJsonData($data_feed_location);
     }    
 
+    public function getJsonData($data_feed_url) {
+      $raw_response = $this->getData($data_feed_url);
+      return json_decode($raw_response);
+    }
 
 
     // Gets the raw STRING response from the Data Export Server 
